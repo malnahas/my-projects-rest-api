@@ -9,7 +9,7 @@ let projects =[
     description: 'First Project on Hono API',
   }
 
-]
+];
 
 let nextProjectId = 2
 
