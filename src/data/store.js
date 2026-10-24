@@ -3,15 +3,15 @@ const seededAt = new Date().toISOString()
 let projects = [
   {
     id: 1,
-    name: 'STC Student Project Website',
-    description: 'REST API for STC Student Project Website built with Hono.',
+    name: 'Commercial Route Planner',
+    description: 'For truck drivers to plan their routes and stops along the way.',
     created_at: seededAt,
     updated_at: seededAt,
   },
   {
     id: 2,
-    name: 'CITP 4316 Class Workshop',
-    description: 'REST API for CITP 4316 Class Workshop built with Hono.',
+    name: 'Route planner API',
+    description: 'For car drivers to plan their routes and stops along the way.',
     created_at: seededAt,
     updated_at: seededAt,
   },
