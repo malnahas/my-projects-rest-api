@@ -1,22 +1,22 @@
 import { Hono } from 'hono'
-import { 
-  listProjects, 
-  getProjectById, 
-  createProject, 
-  updateProject, 
-  deleteProject, 
-  createTask, 
+import {
+  listProjects,
+  getProjectById,
+  createProject,
+  updateProject,
+  deleteProject,
+  createTask,
   listTasksByProject,
 } from '../data/store.js'
 
 import { parseJsonBody } from '../utils/body.js'
 import { ApiError } from '../utils/errors.js'
 import { sendCollection, sendResource } from '../utils/response.js'
-import { 
+import {
   parseIdParam,
   validateProjectCreate,
   validateProjectPatch,
-  validateTaskCreate, 
+  validateTaskCreate,
 } from '../utils/validation.js'
 
 const projects = new Hono()
@@ -51,11 +51,12 @@ projects.get('/:id/tasks', (c) => {
   if (!project) {
     throw new ApiError(404, 'NOT_FOUND', 'Project not found.')
   }
-  const tasks = listTasksByProject(projectId)
-  return sendCollection(c, tasks)
+
+  const data = listTasksByProject(projectId)
+  return sendCollection(c, data)
 })
 
-projects.post('/:id/tasks', async (c) => { 
+projects.post('/:id/tasks', async (c) => {
   const projectId = parseIdParam(c.req.param('id'))
   const project = getProjectById(projectId)
 
@@ -66,7 +67,7 @@ projects.post('/:id/tasks', async (c) => {
   const payload = await parseJsonBody(c)
   const details = validateTaskCreate(payload)
 
-   if (details.length > 0) {
+  if (details.length > 0) {
     throw new ApiError(
       422,
       'VALIDATION_ERROR',
@@ -79,7 +80,6 @@ projects.post('/:id/tasks', async (c) => {
   c.header('Location', `/api/tasks/${task.id}`)
   return sendResource(c, task, 201)
 })
-
 
 projects.get('/:id', (c) => {
   const id = parseIdParam(c.req.param('id'))

@@ -2,7 +2,6 @@ import { z } from 'zod'
 import { ApiError } from './errors.js'
 import { TASK_STATUSES } from './constants.js'
 
-
 const statusMessage = `Status must be one of: ${TASK_STATUSES.join(', ')}.`
 
 const idParamSchema = z
@@ -13,13 +12,12 @@ const idParamSchema = z
     error: 'ID must be a positive integer.',
   })
 
-
 const projectCreateSchema = z.strictObject({
   name: z
     .string({ error: 'Project name is required.' })
     .trim()
     .min(1, { error: 'Project name is required.' }),
-  description: z.string({ error: 'Description must be a string.' }).optional(), 
+  description: z.string({ error: 'Description must be a string.' }).optional(),
 })
 
 const projectPatchSchema = z
@@ -50,11 +48,10 @@ const taskCreateSchema = z.strictObject({
     .min(1, { error: 'Task name is required.' }),
   description: z.string({ error: 'Description must be a string.' }).optional(),
   status: z
-    .string({ error: statusMessage})
+    .string({ error: statusMessage })
     .refine((value) => TASK_STATUSES.includes(value), { error: statusMessage })
     .optional(),
 })
-
 
 const taskPatchSchema = z
   .strictObject({
@@ -82,7 +79,7 @@ const taskPatchSchema = z
       })
     }
   })
-  
+
 export function parseIdParam(rawValue, fieldName = 'id') {
   const result = idParamSchema.safeParse(rawValue)
 
