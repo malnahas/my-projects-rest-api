@@ -10,7 +10,7 @@ let projects = [
   },
   {
     id: 2,
-    name: 'Route planner API',
+    name: ' planner API',
     description: 'For car drivers to plan their routes and stops along the way.',
     created_at: seededAt,
     updated_at: seededAt,
