@@ -4,7 +4,8 @@ import {
     index, 
     integer, 
     sqliteTable,
-    text
+    text,
+    uniqueIndex
 } from 'drizzle-orm/sqlite-core'
 
 export const projects = sqliteTable('projects', {
@@ -31,4 +32,16 @@ export const tasks = sqliteTable('tasks', {
         ),
         index('index_project_id').on(table.projectId),
     ],
+)
+
+export const users = sqliteTable(
+    'users', 
+    {
+        id: integer('id').primaryKey({ autoincrement: true }),
+        email: text('email').notNull().unique(),
+        passwordHash: text('password_hash').notNull(),
+        createdAt: text('created_at').notNull(),
+        updatedAt: text('updated_at').notNull(),
+    },
+    (table)=> (uniqueIndex("idx_users_email").on(table.email)),
 )
