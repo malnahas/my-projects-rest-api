@@ -9,7 +9,7 @@ export async function createSession(db, { userId, tokenHash, expiresAt }) {
       userId,
       tokenHash,
       expiresAt,
-      updatedAt: nowIso(),
+      createdAt: nowIso(),
     })
     .returning()
   return created

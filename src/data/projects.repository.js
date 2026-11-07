@@ -1,4 +1,4 @@
-import {asc, eq} from 'drizzle-orm'
+import { asc, eq } from 'drizzle-orm'
 import { nowIso } from './db'
 import { projects } from './schema'
 
@@ -10,16 +10,17 @@ function normalizeProjectInput(input) {
 }
 
 export async function listProjects(db) {
-    return db.select().from(projects).orderBy(asc(projects.id))
+  return db.select().from(projects).orderBy(asc(projects.id))
 }
 
 export async function getProjectById(db, id) {
-    const [project] = await db.select().from(projects).where(eq(projects.id, id))
-    return project || null
+  const [project] = await db.select().from(projects).where(eq(projects.id, id))
+  return project || null
 }
 
 export async function createProject(db, input) {
   const timestamp = nowIso()
+
   const values = {
     ...normalizeProjectInput(input),
     createdAt: timestamp,

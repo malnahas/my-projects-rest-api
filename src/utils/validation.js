@@ -148,7 +148,6 @@ const logoutSchema = z.strictObject({
     .min(1, { error: 'Refresh token is required.' }),
 })
 
-
 function validateWithSchema(payload, schema) {
   const result = schema.safeParse(payload)
 

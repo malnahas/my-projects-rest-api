@@ -1,19 +1,17 @@
-import bcryptjs from "bcryptjs"
-import { BCRYPT_ROUNDS } from "./constants"
+import bcryptjs from 'bcryptjs'
+import { BCRYPT_ROUNDS } from './constants'
 
 export async function hashPassword(plain) {
-    return bcryptjs.hash(plain, BCRYPT_ROUNDS)
+  return bcryptjs.hash(plain, BCRYPT_ROUNDS)
 }
 
 export async function verifyPassword(plain, hash) {
-    return bcryptjs.compare(plain, hash)
+  return bcryptjs.compare(plain, hash)
 }
-
 
 export function generateRefreshToken() {
   return crypto.randomUUID()
 }
-
 
 export async function hashToken(raw) {
   const encoded = new TextEncoder().encode(raw)

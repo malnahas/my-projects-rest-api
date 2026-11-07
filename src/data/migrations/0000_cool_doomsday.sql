@@ -1,5 +1,5 @@
 CREATE TABLE `projects` (
-	`id` integer PRIMARY KEY NOT NULL,
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`name` text NOT NULL,
 	`description` text DEFAULT '' NOT NULL,
 	`created_at` text NOT NULL,
@@ -7,7 +7,7 @@ CREATE TABLE `projects` (
 );
 --> statement-breakpoint
 CREATE TABLE `tasks` (
-	`id` integer PRIMARY KEY NOT NULL,
+	`id` integer PRIMARY KEY AUTOINCREMENT NOT NULL,
 	`project_id` integer NOT NULL,
 	`title` text NOT NULL,
 	`description` text DEFAULT '' NOT NULL,
@@ -18,4 +18,4 @@ CREATE TABLE `tasks` (
 	CONSTRAINT "tasks_status_check" CHECK("tasks"."status" IN ('todo', 'in_progress', 'done'))
 );
 --> statement-breakpoint
-CREATE INDEX `index_project_id` ON `tasks` (`project_id`);
+CREATE INDEX `idx_tasks_project_id` ON `tasks` (`project_id`);

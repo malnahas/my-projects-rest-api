@@ -17,7 +17,6 @@ export async function verifyAccessToken(token, secret) {
   return verify(token, secret, 'HS256')
 }
 
-
 export function refreshTokenExpiresAt() {
   const date = new Date()
   date.setDate(date.getDate() + REFRESH_TOKEN_TTL_DAYS)

@@ -1,12 +1,14 @@
 import { Hono } from 'hono'
 import { getDb } from '../data/db.js'
 import { createTask, listTasksByProject } from '../data/tasks.repository.js'
-import { listProjects,
-   createProject, 
-   updateProject,
-   deleteProject, 
-   getProjectById
-  } from '../data/projects.repository.js'
+import {
+  listProjects,
+  createProject,
+  updateProject,
+  deleteProject,
+  getProjectById,
+} from '../data/projects.repository.js'
+
 import { parseJsonBody } from '../utils/body.js'
 import { ApiError } from '../utils/errors.js'
 import { sendCollection, sendResource } from '../utils/response.js'
@@ -19,7 +21,7 @@ import {
 
 const projects = new Hono()
 
-projects.get('/', async(c) => {
+projects.get('/', async (c) => {
   const db = getDb(c.env.DB)
   const data = await listProjects(db)
   return sendCollection(c, data)
@@ -78,13 +80,14 @@ projects.post('/:id/tasks', async (c) => {
     )
   }
 
-  const task = await createTask(db,projectId, payload)
+  const task = await createTask(db, projectId, payload)
   c.header('Location', `/api/tasks/${task.id}`)
   return sendResource(c, task, 201)
 })
 
 projects.get('/:id', async (c) => {
   const id = parseIdParam(c.req.param('id'))
+
   const db = getDb(c.env.DB)
   const project = await getProjectById(db, id)
 

@@ -11,4 +11,3 @@ export class ApiError extends Error {
 export function isApiError(error) {
   return error instanceof ApiError
 }
-
