@@ -19,7 +19,8 @@ app.use(
   '/api/*', 
   cors({
     origin: (origin, c) => {
-    const allowed = c.env.ALLOWED_ORIGINS?.split(',').map((o) => o.trim()) ?? []      return allowed.includes(origin) ? origin : ''
+    const allowed = c.env.ALLOWED_ORIGINS?.split(',').map((o) => o.trim()) ?? []      
+    return allowed.includes(origin) ? origin : ''
     },
     allowMethods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'], 
     allowHeaders: ['Content-Type', 'Authorization'],
